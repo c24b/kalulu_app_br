@@ -1,0 +1,58 @@
+{
+    "ENVIRONNEMENT": {
+        "NAME": "default",
+        "ENV": "default",
+        "DEBUG": false,
+        "user": "admin"
+    },
+    "FILES_SERVER": {
+        "activate": false,
+        "name": "ludo_app",
+        "host": "0.0.0.0",
+        "hostname": "vps.example.org",
+        "login": "mylogin",
+        "dir": "/home/user/kalulu/files/raw"
+    },
+    "SOURCES_SERVER": {
+        "name": "kalulu",
+        "host": "lab.driss.org",
+        "hostname": "lab.driss.org",
+        "repo": "kalulu",
+        "login": "kalulu_team"
+    },
+    "SSL": {
+        "activate": false,
+    	"ssl_dhparams": null
+    },
+    "API": {
+        "name": "api",
+        "host": "0.0.0.0",
+        "hostname": "api.example.org",
+        "port": "5000",
+        "token": "",
+        "sudo_token": "",
+        "static_dir": "static",
+        "allowed_IPs": "example.org, dashboard.example.org"
+    },
+    "FRONT": {
+        "name": "front",
+        "host": "0.0.0.0",
+        "port": "8080",
+        "hostname": "dashboard.example.org",
+        "static_dir": "assets",
+        "allowed_IPs": "api.example.org, example.org"
+    },
+    "DOC": {
+        "name": "doc",
+        "host": "0.0.0.0",
+        "port": "80",
+        "hostname": "docs.example.org",
+        "static_dir": "site"
+    },
+    "DB": {
+        "name": "kalulu",
+        "host": "localhost",
+        "port": 27017,
+        "URI": "mongodb://localhost:27017/kalulu"
+    }
+}

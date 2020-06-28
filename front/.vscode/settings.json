@@ -1,0 +1,5 @@
+{
+    "gitlab.instanceUrl": "\"gitlab.instanceUrl\":\"https://lab.driss.org\"",
+    "gitlab.pipelineGitRemoteName": "kalulu-vue-front",
+    "gitlab.remoteName": "kalulu-vue-front"
+}

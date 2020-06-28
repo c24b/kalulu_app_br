@@ -1,0 +1,9 @@
+[program:celery]
+user={{ENVIRONNEMENT.user}}
+directory={{API.dir}}
+command={{VENV_DIR}}/bin/celery -A celery_workers worker --loglevel=INFO  -c 4
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/celery/{{API.name}}.err.log
+stdout_logfile=/var/log/celery/{{API.name}}.out.log
+redirect_stderr=true

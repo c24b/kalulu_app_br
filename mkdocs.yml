@@ -1,0 +1,22 @@
+site_name: Kalulu_app doc
+site_description: Documentation on Kalulu Dashboard App
+site_author: http://driss.org
+repo_url: https://lab.driss.org/kalulu_team/kalulu_app
+repo_name: 'Github'
+use_directory_urls: True
+markdown_extensions:
+    - smarty
+    - toc:
+        permalink: True
+nav:
+    - Home: 'index.md'
+    - User tutorial: 'user-guide/getting-started.md'
+    - Researcher tutorial: 'researcher-guide/index.md'
+    - Administrator doc: 'admin-guide/index.md'
+    - Developper doc: 'contribution-guide/index.md'
+    - About: 'about.md'
+    - License: 'license.md'
+    - Credits: 'credits.md'
+plugins:
+    - search
+theme: readthedocs

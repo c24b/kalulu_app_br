@@ -1,0 +1,438 @@
+
+
+
+  body {
+      /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-align: center;
+      /* background: url('~@assets/img/loading_background.png'); */    
+      /* background-color: #000090; */
+      color:#fefefe;
+      font-size:34px;  
+      background-image: url(../assets/img/background_lookandlearn.png);
+      /* background-repeat: no-repeat; */
+      background-size: cover;
+      height:100%;
+      margin:0;
+      /* background-size: 100% auto;  */
+      overflow:auto;
+    }
+    h1, h2, h3 {
+      font-weight: bolder;
+      font-size: 32;
+      display:block;
+    }
+    
+    h2.heading {
+      font-size:38px;
+    }
+    ul{
+      list-style-type: none;
+      display:inline;
+      justify-content: space-between;
+    }
+    
+    li{
+      list-style-type: none;
+    }
+    
+    
+  footer {
+      font-size: 22px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    height: 60px;
+    line-height: 60px;
+  /* color:black; */
+  /* background-color:lavender; */
+    }
+  /* Navbar buttons */
+  aside#navbar{
+    display: block;
+    float:left;
+    width:100px;
+    height:200px;  
+  }
+  
+  aside#navbar:empty{
+    display:none;
+  }
+  aside#navbar ul {
+    margin:0;
+  }
+  button#menu{
+    margin:0;
+    padding:2;
+  }
+  
+  button#back{
+    margin:0;
+    padding:2;
+  }
+  
+  /* Article */
+  /* article {
+    display:flexbox;
+    padding:1%;
+    margin-top:10px;
+    margin-bottom:10px;
+    border-radius: 35px;
+   
+  } */
+  
+  article#last_lesson{
+    display:block;
+    
+  }
+  article#last_lesson > div#last_lesson_graph
+  {
+    display:inline-block;
+    width:95%;
+    
+  }
+  
+  /* article#decision{
+    display:inline-block;
+    /* float:left; */
+    /* width:100%;
+    padding:1%;
+  } */
+  
+  /* article#lexical_decision > div#lexical_decision_graph{    
+  } */
+  
+  /* article#decision aside{
+    display:block;
+  } */
+  
+  article.widget.graph{
+    display:flex;
+    margin:1%;
+    background-color: #7AD1FF;
+    padding:1%
+  }
+  article{
+    padding:1%;
+    margin:1%;
+    
+  }
+  
+  article.widget {
+    display:flex 1 1 650px;
+    margin-bottom: 10px;
+    /* background-color: teal; */
+    opacity: 0.8;
+    border-radius: 35px;
+   
+  }
+  article.widget.text{
+    background-color:#ED9AB5;
+  }
+  article.widget.text2{
+    background-color:#9FF9AB;
+  }
+  div.widget-list {
+    display:flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+  }
+  
+  div.box{
+    display: flex;
+    flex-basis: auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    margin-top:1%;
+  }
+  
+  
+  div.box > div.widget > article {
+    display:inline-block;
+    justify-content: space-between;
+    
+  }
+  div.box > div.widget > article > div.graph{
+    flex: 1 1 48%;
+    
+  }
+  
+  /* div#student_decision > div.box > div.widget{
+    display:inline-block;
+    justify-content: space-around;
+  } */
+  
+  /* div.box#student_decision{
+      display: flex;
+      flex-basis: auto;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: space-around;
+      margin-top:1%;  
+  }
+  div.box#student_decision > div.widget > article{
+    flex: 1 1 48%;
+  } 
+  div.box#student_decision > div.widget{
+    display:inline-block;
+    justify-content: space-around;
+  } */
+  /* div#student_decision > div.box > div.widget > article#lexical_decision  {
+    flex: 1 1 48%;
+    background-color:white;
+    
+  } */
+  
+  article.slider {  
+    padding:2%;
+    margin-bottom:2%
+  }
+  
+  
+  /* Internal graph navbar */
+  aside#graph-navbar{
+    display: flex;
+  }
+  
+  aside#graph-navbar ul{
+    display: flex;
+    margin:0;
+    /* padding-left:5%; */
+  }
+  aside#graph-navbar button{
+    padding:5px;
+    
+   }
+  
+   aside#graph-navbar button img{
+    width:40px;
+   }
+  
+   /* Header */
+   header{
+    display:inline-flex;
+    flex-direction: column;
+  }
+  header > div#brand {
+    display: inline-flex;
+    align-items: center;
+    float: right;
+  }
+  header > div#brand > img {
+    width:auto;
+  }
+  header > div#brand > h2 {
+    }
+  
+  header > aside {
+    float:left;
+  }
+  
+  form {
+    
+    border-radius: 45px;
+    /* background-color: #fcdf03; */
+    /* background-color: blueviolet; */
+    background-image: url(../assets/img/loading_background.png);
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    display: block;
+    padding-top:2%;
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+  
+  form > label {
+    text-align: center;
+    display: block;
+    margin-bottom: 2%;
+    
+  }
+  
+  form > input {  
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+  }
+  
+  form > button {
+    display: block;
+    margin-bottom: 2%;
+  }
+  
+  form#select_subject{
+      position: block;
+      text-align: center;
+      color: white;
+      padding-bottom: 5%;
+  }
+  
+  div#selection {
+    display: flex 1 1 265px;
+    
+  }
+  div#selection > button {
+    border-radius: 25px;
+    border: 0;
+    width: 250px;
+    height: 250px;
+    padding:20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  div#selection  > button > span{
+    background-color: khaki;
+    opacity:0.7;
+    font-size: 28px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+  }
+  
+  button#nb{
+    background-image: url(../assets/img/xprize_decimal_100.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+  }
+  
+  button#lt{
+    background-image: url(../assets/img/cursive_upper_a.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+  }
+  
+  .alert{
+   border-radius:20px; 
+   margin-left:10%;
+   margin-right:10%;
+  }
+  
+  .apexcharts-tooltip {
+    background: #f3f3f3;
+    color: orange;
+  }
+  
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    background: #444;
+    color: black;
+  }
+  button.tooltip{
+    color:black;
+  }
+  /* button#id > * {
+    
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 5px;
+  } */
+  
+  
+  
+  
+  .chap1 {
+    background-color:#9670E0
+  }
+  .chap2 {
+    background-color:#FFE822
+  }
+  .chap3 {
+    background-color:#ED9AB5
+  }
+  .chap4 {
+    background-color:#A84349
+  }
+  .chap5 {
+    background-color:#3F32A5
+  }
+  .chap6 {
+    background-color:#9FF9AB
+  }
+  .chap7 {
+    background-color:#C3C2C4
+  }
+  
+  .chap8 {
+    background-color:#9670E0
+  }
+  .chap9 {
+    background-color:#50FEE4
+  }
+  
+  .chap10 {
+    background-color:#7AD1FF
+  }
+  .chap11 {
+    background-color:#C3C2C4
+  }
+  .chap12 {
+    background-color:#FFE822
+  }
+  .chap13 {
+    background-color:#A84349
+  }
+  .chap14 {
+    background-color:#ED9AB5
+  }
+  .chap15 {
+    background-color:#9FF9AB
+  }
+  .chap16 {
+    background-color:#3F32A5
+  }
+  .chap17 {
+    background-color:#50FEE4
+  }
+  .chap18 {
+    background-color:#7AD1FF
+  }
+  .chap19 {
+    background-color:#FFAF57
+  }
+  .chap20 {
+    background-color:#9670E0
+  }
+  .vue-slider-rail {
+    background-color: orange;
+    border-radius: 15px;
+    height:10px;
+  }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body{
+      resize: block;
+    }
+    article {
+      display:inline-block;
+      width:100%;
+      padding:2%;
+    }
+    /* main > div {
+      display: inherit;
+    } */
+    footer {
+      display:block;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background: #000000;
+      color: #FFFFFF;
+    }
+  }
+

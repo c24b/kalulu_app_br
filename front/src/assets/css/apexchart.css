@@ -1,0 +1,27 @@
+.apexcharts-xaxis-title {
+  font-weight: bold
+}
+.apexcharts-yaxis-title {
+  font-weight: bold
+}
+.apexcharts-canvas{
+  float:left;
+}
+.apexcharts-xaxis-title {
+  font-weight: 900;   
+}
+.apexcharts-title-text {
+  font-weight: 700;
+}
+.apexcharts-yaxis-title {
+  font-weight: 700;
+}
+.apexcharts-tooltip {
+  background-color: bisque;
+  color: black;
+}
+.apexcharts-tooltip span {
+  padding: 5px 10px;
+  display: inline-block;
+  
+}

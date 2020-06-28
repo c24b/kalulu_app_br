@@ -1,0 +1,20 @@
+from settings import DB_NAME, DB_URI, DB_PORT
+from flask import current_app, g
+from flask.cli import with_appcontext
+from utils.db import get_client, connect, close
+from pymongo import MongoClient
+from settings import DB_HOST, DB_PORT, DB_NAME
+
+def get_db():
+    if 'db' not in g:
+        client = MongoClient(DB_HOST, DB_PORT)
+        g.db = client[DB_NAME]
+    return g.db
+
+
+def close_db(e=None):
+    db = g.pop('db', None)
+
+    if db is not None:
+        client = MongoClient(DB_HOST, DB_PORT)
+        client.close()

@@ -1,0 +1,107 @@
+GP	GRAPHEME	PHONEME	CV	LESSON	CHAPTER	AUDIO	IMAGE	LL_EXCEPTIONS	Notes (INFO)	TAG
+a-a	a	a	V	1	1	ananas	pineapple	DEFAULT		a
+i-i	i	i	V	2	1	pie	magpie	DEFAULT		i
+i-j	i	j	V	2	1	NA	NA	SKIP		i
+i-J	i	J	V	2	1	NA	NA	SKIP		i
+e-%	e	%	V	3	1	melon	melon	DEFAULT		e
+o-O	o	O	V	4	1	NA	NA	SKIP		o
+o-o	o	o	V	4	1	orange	orange	DEFAULT		o
+u-8	u	8	V	5	2	NA	NA	SKIP		u
+u-y	u	y	V	5	2	bulle	bubble	DEFAULT		u
+l-l	l	l	C	6	2	lama	lama	DEFAULT		l
+ll-l	ll	l	C	6	2	NA	NA	SKIP		l
+m-m	m	m	C	7	2	mouton	sheep	DEFAULT		m
+mm-m	mm	m	C	7	2	NA	NA	SKIP		m
+s-s	s	s	C	8	2	serpent	snake	DEFAULT		s
+ss-s	ss	s	C	8	2	NA	NA	SKIP		s
+é-e	é	e	V	9	3	elephant	elephant	DEFAULT		é
+v-v	v	v	C	10	3	violon	violin	DEFAULT		v
+r-R	r	R	C	11	3	requin	shark	DEFAULT		r
+rr-R	rr	R	C	11	3	NA	NA	SKIP		r
+ou-o	ou	o	V	12	3	NA	NA	SKIP		ou
+ou-u	ou	u	V	12	3	ours	bear	DEFAULT		ou
+ou-w	ou	w	V	12	3	NA	NA	SKIP		ou
+e-#	e	#	NA	13	4	fr_lettres_muettes_1	fr_lettres_muettes_1	COMMON	Audio and Picture explanation	lettres_muettes_e_s_t_x
+s-#	s	#	NA	13	4	fr_lettres_muettes_1	fr_lettres_muettes_1	COMMON	Audio and Picture explanation	lettres_muettes_e_s_t_x
+t-#	t	#	NA	13	4	fr_lettres_muettes_1	fr_lettres_muettes_1	COMMON	Audio and Picture explanation	lettres_muettes_e_s_t_x
+x-#	x	#	NA	13	4	fr_lettres_muettes_1	fr_lettres_muettes_1	COMMON	Audio and Picture explanation	lettres_muettes_e_s_t_x
+n-n	n	n	C	14	4	noix	nut	DEFAULT		n
+nn-n	nn	n	C	14	4	NA	NA	SKIP		n
+un-1	un	1	V	15	4	un	one	DEFAULT		un
+f-f	f	f	C	16	5	feu	fire	DEFAULT		f
+ff-f	ff	f	C	16	5	NA	NA	SKIP		f
+ch-S	ch	S	C	17	5	cheval	horse	DEFAULT		ch
+j-Z	j	Z	C	18	5	journal	newspaper	DEFAULT		j
+d-d	d	d	C	19	6	de	die	DEFAULT		d
+t-t	t	t	C	20	6	tigre	tiger	DEFAULT		t
+tt-t	tt	t	C	20	6	NA	NA	SKIP		t
+p-p	p	p	C	21	6	pomme	apple	DEFAULT		p
+pp-p	pp	p	C	21	6	NA	NA	SKIP		p
+c-k	c	k	C	22	7	cle	key	DEFAULT		c
+cc-k	cc	k	C	22	7	NA	NA	SKIP		c
+b-b	b	b	C	23	7	ballon	ball	DEFAULT		b
+g-g	g	g	C	24	7	gorille	gorilla	DEFAULT		g
+gu-g	gu	g	C	25	8	bague	ring	DEFAULT		gu
+k-k	k	k	C	26	8	kiwi	kiwi	DEFAULT		k
+q-k	q	k	C	27	8	coq	rooster	DEFAULT		q
+qu-k	qu	k	C	27	8	quille	bowling_pin	DEFAULT		q
+z-z	z	z	C	28	9	zèbre	zebra	DEFAULT		z
+es-E	es	E	V	29	9	fr_lesson_es	fr_lesson_es	DEFAULT	For the image, we will write a card with an 'tu es'.	es
+est-E	est	E	V	30	9	fr_lesson_est	fr_lesson_est	DEFAULT	For the image, we will write a card with an 'il est'.	est
+em-@	em	@	V	31	10	empreinte	footprint	DEFAULT		em_en
+en-@	en	@	V	31	10	tente	tent	DEFAULT		em_en
+om-§	om	§	V	32	10	pompe	pump	DEFAULT		om_on
+on-§	on	§	V	32	10	bourdon	bumblebee	DEFAULT		om_on
+am-@	am	@	V	33	10	ampoule	lightbulb	DEFAULT		am_an
+an-@	an	@	V	33	10	antilope	antelope	DEFAULT		am_an
+en-5	en	5	V	34	11	chien	dog	DEFAULT		en_im_in
+im-5	im	5	V	34	11	timbre	stamp	DEFAULT		en_im_in
+in-5	in	5	V	34	11	poussin	chick	DEFAULT		en_im_in
+e-E	e	E	V	35	11	escargot	snail	DEFAULT		eCC
+c-s	c	s	C	36	11	citron	lemon	DEFAULT		c_ç/s/
+ç-s	ç	s	C	36	11	glacon	icecube	DEFAULT		c_ç/s/
+sc-s	sc	s	C	36	11	scie	saw	DEFAULT	we do not have a pic	c_ç/s/
+g-Z	g	Z	C	37	12	girafe	giraffe	DEFAULT		g/Z/
+s-z	s	z	C	38	12	fraise	strawberry	DEFAULT		s/z/
+er-e	er	e	V	39	12	cahier	book	DEFAULT		er
+oi-W	oi	W	V	40	13	oie	goose	DEFAULT		oi
+è-E	è	E	V	41	13	règle	ruler	DEFAULT		è
+et-E	et	E	V	42	13	sifflet	whistle	DEFAULT		et
+et-e	et	e	V	42	13	NA	NA	SKIP		et
+ent-#	ent	#	NA	43	14	fr_lesson_ent	fr_lesson_ent	COMMON		lettres_muettes_ent
+au-o	au	o	V	44	14	faucon	falcon	DEFAULT		au_eau
+au-O	au	O	V	44	14	NA	NA	SKIP		au_eau
+eau-o	eau	o	V	44	14	bateau	boat	DEFAULT		au_eau
+ant-@	ant	@	V	45	14	fr_lesson_ant	fr_lesson_ant	DEFAULT	make a card with words on it	ant
+h-#	h	#	C	46	15	fr_lesson_h	fr_lesson_h	COMMON	Audio and Picture explanation	h
+th-t	th	t	C	46	15	NA	NA	SKIP		h
+t-s	t	s	C	47	15	potion	potion	DEFAULT		t/s/
+x-x	x	x	C	48	15	saxophone	saxophone	DEFAULT		x
+gn-N	gn	N	C	49	16	oignon	onion	DEFAULT		gn
+ai-e	ai	e	V	50	16	NA	NA	SKIP		ai
+ai-E	ai	E	V	50	16	lait	milk	DEFAULT		ai
+ez-e	ez	e	V	51	16	nez	nose	DEFAULT		ez
+b-#	b	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+c-#	c	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+d-#	d	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+f-#	f	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+g-#	g	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+l-#	l	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+p-#	p	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+r-#	r	#	NA	52	17	fr_lettres_muettes_2	fr_lettres_muettes_2	COMMON	Audio and Picture explanation	lettres_muettes
+ill-J	ill	J	V	53	17	chenille	caterpillar	DEFAULT		ill
+eu-2	eu	2	V	54	17	beurre	butter	DEFAULT		eu_oeu
+oeu-2	oeu	2	V	54	17	coeur	heart	DEFAULT		eu_oeu
+eu-9	eu	9	V	54	17	NA	NA	SKIP		eu_oeu
+oeu-9	oeu	9	V	54	17	NA	NA	SKIP	 or oeuf	eu_oeu
+â-A	â	A	V	55	18	ane	donkey	DEFAULT		â
+oy-4	oy	4	V	56	18	noyer	walnut	DEFAULT		oy
+il-j	il	j	V	57	19	ail	garlic	DEFAULT		il/j/
+ill-j	ill	j	V	58	19	bouteille	bottle	DEFAULT		ill/j/
+ph-f	ph	f	C	59	19	phare	lighthouse	DEFAULT		ph
+ei-E	ei	E	V	60	19	treize	thirteen	DEFAULT		ei
+ei-e	ei	e	V	60	19	NA	NA	SKIP		ei
+y-J	y	J	C	61	20	NA	NA	SKIP		y
+y-j	y	j	C	61	20	yoyo	yo-yo	DEFAULT		y
+ê-E	ê	E	V	62	20	guepe	wasp	DEFAULT	to be found	ê
+w-w	w	w	C	63	20	wapiti	elk	DEFAULT		w

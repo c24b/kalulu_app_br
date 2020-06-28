@@ -1,0 +1,9 @@
+[program:API]
+user={{ENVIRONNEMENT.user}}
+directory={{API.dir}}
+command={{VENV_DIR}}/bin/gunicorn -w 4 API:app -b {{API.host}}:{{API.port}}
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/gunicorn/{{API.name}}.err.log
+stdout_logfile=/var/log/gunicorn/{{API.name}}.out.log
+redirect_stderr=true

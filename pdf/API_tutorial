@@ -1,0 +1,483 @@
+<h1 id="api-manual">API MANUAL</h1>
+<blockquote>
+<blockquote>
+<p>this is a manual to <img src="screenshots/kalulu.png" alt="screenshots/kalulu.png" /></p>
+</blockquote>
+</blockquote>
+<h2 id="what-is-an-api">What is an API ?</h2>
+<p>API stands for Application Programming Interface.</p>
+<p>It consists of a web interface between the user and the database: it exposes url (called <strong>endpoint</strong>) to access, update, delete, create the data inside the tables of the database called resources providing HTTP <strong>methods</strong> using <strong>parameters</strong> in the url.</p>
+<p>The API interface gives a facility for researcher and administrator to: access, consult and edit the data stored in the database. API is then the main entrance to control the settings, results and statistics of the database and understand the data underlying feeding each plot and graphic in the web dashboard.</p>
+<p>Endpoint consist of a dynamic url for a resource accessible throught <strong><em>methods</em></strong> corresponding to actions, and <strong><em>parameters</em></strong> acting like filters.</p>
+<p>For better understanding, they are organized into <strong><em>categories</em></strong>. One categorie gathers multiple endpoints for one type of resource.</p>
+<figure>
+<img src="screenshots/API.png" alt="" /><figcaption>https://research.ludoeducation.fr</figcaption>
+</figure>
+<blockquote>
+<p>Current API interface is available at :</p>
+</blockquote>
+<blockquote>
+<p><a href="https://research.ludoeducation.fr">https://research.ludoeducation.fr</a></p>
+</blockquote>
+<h2 id="anatomy-of-the-api">Anatomy of the API</h2>
+<p>The API provides an web user-friendly interface using Swagger and Open API specifications for describing the schema. In this interface, <strong><em>categories</em></strong> consists of dropdown list with a short description of the kind of resource. When you click on it: the full list of <strong><em>endpoints</em></strong> available will appear.</p>
+<figure>
+<img src="screenshots/category_endpoint.png" alt="" /><figcaption>Categories endpoint</figcaption>
+</figure>
+<h3 id="category-endpoint">Category endpoint</h3>
+<p>All resources that describe the activity of students are stored in a <strong>category endpoint</strong>.</p>
+<p>Take a closer look at category called <code>activity</code>.</p>
+<p>Activity regroups statistics on game usage at student / classroom level consultable on global, on a specific subject or dataset.</p>
+<p>This access is usefull for researcher and admin to consult <strong>global activity</strong> of a student or a classroom (timespent, session of gameplay, scores).</p>
+<blockquote>
+<p>These endpoint offers different level of information to control activity data.</p>
+</blockquote>
+<p>Such endpoint will retrive data that can answer at different level to question such as:</p>
+<ul>
+<li><p>Is classroom respecting the order of sessions and the frequency?</p></li>
+<li><p>What is the average timespent on a subject?</p></li>
+<li><p>Is there a difference in timespent and good reponses depending of the order of the session?</p></li>
+<li><p>Are student spending more time on chapter session or lesson session?</p></li>
+</ul>
+<p><small> Theses endpoint are also used to display information or feed the plot into the teacher dashboard :</p>
+<blockquote>
+<p>As an example: Student info is displayed loading data from <a href="https://api.test.driss.org/activity/students/1226/subjects/letters/info">API endpoint: ‘activity/students/1226/subjects/letters/info’</a></p>
+</blockquote>
+<figure>
+<img src="screenshots/student_info.png" alt="" /><figcaption>Student Info which data are loaded from endpoint</figcaption>
+</figure>
+<p></small></p>
+<p>)</p>
+<p>If you click on the category section activity bar: a list of <strong>endpoints</strong> will appear for activity category with a short description.</p>
+<p><img src="screenshots/activity.png" /></p>
+<h3 id="what-is-an-endpoint-api">What is an endpoint API?</h3>
+<p><img src="screenshots/endpoint_ex.png" /></p>
+<p>API endpoint is an access point to a resource stored in the database. It consists technically of :</p>
+<ul>
+<li><p>an <strong>URL</strong>: giving the location of the resource (called URI: Unified Resources Identifier) composed of the path and the parameters into <code>{}</code></p></li>
+<li><p>a <strong>method</strong>: expressed in an HTTP Verb which corresponds to a specific interaction with the database</p>
+<ul>
+<li>GET</li>
+<li>PUT</li>
+<li>POST</li>
+<li>DELETE Swagger interface added an explicit color code for each of these method.</li>
+</ul></li>
+</ul>
+<p>With those 2 elements, we will perform an HTTP request explicitly describing where is the resource and the interaction with it: simply using the HTTP protocol.</p>
+<figure>
+<img src="screenshots/ENDPOINT.png" alt="" /><figcaption>Endpoint example</figcaption>
+</figure>
+<h4 id="endpoint-sections">Endpoint Sections:</h4>
+<p>If you click on one specific endpoint, 4 main sections appears:</p>
+<ul>
+<li>the header endpoint</li>
+<li>the documentation</li>
+<li>the parameters section</li>
+<li>the response section</li>
+</ul>
+<h4 id="header">Header</h4>
+<p>The interface displays for each endpoint:</p>
+<ul>
+<li><p>the <strong>method</strong> GET in blue to view, PUT in orange to edit/update the resource, DELETE in red to remove the resource, CREATE in green to add a new ressource</p></li>
+<li><p>the <strong>url</strong> where the resource is accessible with the <strong>parameters</strong> that are always between <code>{}</code></p></li>
+<li><p>a short <strong>description</strong> of the resources availables</p></li>
+<li><p>and eventually a <strong>lock</strong> button if the resource is protected throught password</p></li>
+</ul>
+<figure>
+<img src="screenshots/methods.png" alt="" /><figcaption>Differents methods are available with color code</figcaption>
+</figure>
+<h4 id="documentation">Documentation</h4>
+<ul>
+<li>Description : explains what kind of information is available</li>
+<li>Methods: give an SQL equivalent of the query made to the database</li>
+<li>Structure of the output (mostly for graphs)</li>
+<li>Link to database documentation</li>
+</ul>
+<figure>
+<img src="screenshots/endpoint_description.png" alt="" /><figcaption>Description and methods use for each endpoint</figcaption>
+</figure>
+<h4 id="parameters">Parameters</h4>
+<p>Section parameters consists of displaying:</p>
+<ul>
+<li>the name of the different <strong>parameters</strong> availables<br />
+</li>
+<li>the different <strong>input types</strong> accepted: such as integer, string, coma separated values, string with controled values, …</li>
+</ul>
+<p>Theses parameters always corresponds to elements in brackets inside the url. theses parameters allows to create custom queries using parameters as fields and filters.</p>
+<p>Example:</p>
+<p>Endoint: <code>activity/students/{student}/subjects/{subject}/</code> Query: <code>activity/students/1226/subjects/letters/info</code></p>
+<p>Loads activity information on student n° 1226 and on subject letters</p>
+<blockquote>
+<p>try to change the parameters to get other student on other subject</p>
+</blockquote>
+<figure>
+<img src="screenshots/parameters.png" alt="" /><figcaption>Parameters</figcaption>
+</figure>
+<h3 id="response-section">Response section</h3>
+<p>Response section guides you over the responses giving first generic response with code atteched to a textual description that explains the type of error.</p>
+<figure>
+<img src="screenshots/responses.png" alt="" /><figcaption>Response</figcaption>
+</figure>
+<p>Performing a request thought the interface make the response section change: giving more information on the process.</p>
+<p>When everything went OK: data is displayed inside the response section with the corresponding 200 code.</p>
+<p>When something went wrong a message is return giving contextual information. Depending on the type of error: the code is attached:</p>
+<ul>
+<li>404 data was not found or resource is not available</li>
+<li>406 one or multiple parameters were incorrect</li>
+<li>500 error came from the database or the API (contact administrator in this case)</li>
+</ul>
+<h2 id="how-to-get-data-from-the-api">How to get data from the API?</h2>
+<p>To access the data you have the differents options:</p>
+<ul>
+<li><a href="###Try_it_online">Try it online</a> with the web interface</li>
+<li><a href="###Direct_access">Try it directly</a> on your web browser</li>
+<li><a href="###CSV_format">Load the CSV version</a> of the data</li>
+<li><a href="###External_script">Use external script</a> to manipulate the data</li>
+</ul>
+<h3 id="try-it-online">Try it online</h3>
+<h5 id="make-the-request">Make the request</h5>
+<p>Press the button <code>tryit</code></p>
+<figure>
+<img src="screenshots/tryit.png" alt="" /><figcaption>Tryit Button</figcaption>
+</figure>
+<p>A new form will appear asking to fill out the parameters</p>
+<figure>
+<img src="screenshots/tryitform.png" alt="" /><figcaption>Online form to enter the parameters</figcaption>
+</figure>
+<p>Fill the box with the required parameters and press execute</p>
+<figure>
+<img src="screenshots/tryitformexec.png" alt="" /><figcaption>Execution of the form</figcaption>
+</figure>
+<p>Once executed API shows in the black box the request made</p>
+<figure>
+<img src="screenshots/tryitformexecuted.png" alt="" /><figcaption>Response to execution</figcaption>
+</figure>
+<blockquote>
+<p>The tryit online button and forms helps to build the url by filling out parameters Here requests url black box shows wich request have been made with the correct parameters: for classroom 1 and subject <code>letters</code> this only consisting of changing values between the {} in url. For endpoint <code>API_URL/activity/classrooms/{classroom}/subjects/{subject}</code> the replacement has been made as the following <code>API_URL/activity/classrooms/1/subjects/letters</code></p>
+</blockquote>
+<figure>
+<img src="screenshots/request_url.png" alt="" /><figcaption>Request url</figcaption>
+</figure>
+<h5 id="understand-the-response">Understand the response</h5>
+<p>The result is displayed in the section server response: - with a generic <strong>code</strong> and a description <strong>message</strong> - detailled response lays into section <code>response body</code></p>
+<p>Detailled type of responses the server can give are listed below and described</p>
+<figure>
+<img src="screenshots/response_types.png" alt="" /><figcaption>Response types</figcaption>
+</figure>
+<h6 id="response-is-ok">Response is OK</h6>
+<p>If response is 200 or 204: no problem have been encountered: API response body displays the data from the database</p>
+<figure>
+<img src="screenshots/200.png" alt="" /><figcaption>Reponse 200: everything is OK data is displayed</figcaption>
+</figure>
+<h5 id="response-is-wrong">Response is Wrong</h5>
+<p>Each error code (404, 406, 500) corresponds to a certain type of response: a generic error message is attached and detail of the error lays in message body</p>
+<ul>
+<li>If error is 404: no data has been found</li>
+</ul>
+<figure>
+<img src="screenshots/404.png" alt="" /><figcaption>Response 4O4: Error resource not found</figcaption>
+</figure>
+<ul>
+<li>If error is 406: parameter given is incorrect. In this case response body message gives the wrong parameter</li>
+</ul>
+<figure>
+<img src="screenshots/406.png" alt="" /><figcaption>Response 406: Error parameter is incorrect</figcaption>
+</figure>
+<ul>
+<li>If error is 500: table is empty. It means that population of database had a problem and need to be executed again ask for admin to regenerate the database</li>
+</ul>
+<h3 id="direct-access">Direct access</h3>
+<p>You can also acess it directly into the web browser without loading the interface.</p>
+<p>Online tryit button guided you to build the request URL through a web form and helped you to understand the response displaying extended documentation on messages, responses and errors types.</p>
+<p>Blue endpoints (GET methods) can be directly accessible into your favorite web browser without filling the form inside the interface as it consists simply on loading a page.</p>
+<h4 id="prepare-your-request">Prepare your request</h4>
+<ul>
+<li>In the interface copy the request URL</li>
+</ul>
+<figure>
+<img src="screenshots/copy.png" alt="" /><figcaption>Copy the request inside the section</figcaption>
+</figure>
+<p>Change the parameters if you need it</p>
+<ul>
+<li>Paste it into the navigation bar of your favorite web browser</li>
+</ul>
+<figure>
+<img src="screenshots/navbar1.png" alt="" /><figcaption>Paste into your navigation bar</figcaption>
+</figure>
+<ul>
+<li>Press enter</li>
+</ul>
+<figure>
+<img src="screenshots/navbar2.png" alt="" /><figcaption>Press enter or click on the arrow</figcaption>
+</figure>
+<p>You have now access to the raw response inside your web browser!</p>
+<h5 id="understand-the-response-1">Understand the response</h5>
+<p>Status code gives you the information on success/failure of the request</p>
+<ul>
+<li>200 OK</li>
+<li>404 Not found</li>
+<li>406 Wrong parameters</li>
+</ul>
+<h3 id="csv-format">CSV format</h3>
+<h6 id="prepare-the-request">Prepare the request</h6>
+<ul>
+<li>In the API interface copy the request URL</li>
+</ul>
+<figure>
+<img src="screenshots/copy.png" alt="" /><figcaption>Copy the url in Request url section</figcaption>
+</figure>
+<ul>
+<li>Paste it into the navigation bar of your favorite web browser</li>
+</ul>
+<figure>
+<img src="screenshots/navbar1.png" alt="" /><figcaption>Paste into your navbar</figcaption>
+</figure>
+<ul>
+<li>Add <code>/csv</code> at the end of the url</li>
+</ul>
+<figure>
+<img src="screenshots/csv.png" alt="" /><figcaption>write /csv at the end of the url</figcaption>
+</figure>
+<ul>
+<li>Press enter</li>
+</ul>
+<p>You now have access to the data in a CSV format!</p>
+<figure>
+<img src="screenshots/access_csv.png" alt="" /><figcaption>Get the csv</figcaption>
+</figure>
+<h6 id="understand-the-response-2">Understand the response</h6>
+<p>Status code inside the HTML page gives you the information on success/failure of the request:</p>
+<ul>
+<li>200 OK =&gt; displays the table on the screen</li>
+<li>404 Not found =&gt; No data</li>
+<li>406 Wrong parameters =&gt; Your request has some problem in parameters</li>
+</ul>
+<h3 id="external-script">External script</h3>
+<p>You can access programmatically to the data in CSV and load it.</p>
+<h6 id="with-python">With python</h6>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> pandas</span>
+<span id="cb1-3"><a href="#cb1-3"></a>API_URL <span class="op">=</span> <span class="st">&quot;https://www.api.test.driss.org&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#parameters</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>students <span class="op">=</span> [<span class="dv">1223</span>, <span class="dv">1212</span>, <span class="dv">1245</span>] </span>
+<span id="cb1-6"><a href="#cb1-6"></a>subjects <span class="op">=</span> [<span class="st">&quot;letters&quot;</span>, <span class="st">&quot;numbers&quot;</span>]</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="cf">for</span> students <span class="kw">in</span> students:</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="cf">for</span> subject <span class="kw">in</span> subjects:</span>
+<span id="cb1-9"><a href="#cb1-9"></a>        endpoint <span class="op">=</span> <span class="st">&quot;/activity/students/</span><span class="sc">{}</span><span class="st">/subjects/</span><span class="sc">{}</span><span class="st">/csv&quot;</span>.<span class="bu">format</span>(student,subject)</span>
+<span id="cb1-10"><a href="#cb1-10"></a>        r <span class="op">=</span> requests.get(API_URL<span class="op">+</span>endpoint)</span>
+<span id="cb1-11"><a href="#cb1-11"></a>        <span class="cf">if</span> r.code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb1-12"><a href="#cb1-12"></a>            data <span class="op">=</span> r.text</span>
+<span id="cb1-13"><a href="#cb1-13"></a>            csv_data <span class="op">=</span> [x.split(<span class="st">&#39;,&#39;</span>) <span class="cf">for</span> x <span class="kw">in</span> data.split(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)]</span>
+<span id="cb1-14"><a href="#cb1-14"></a>            head <span class="op">=</span> csv_data[<span class="dv">0</span>]</span>
+<span id="cb1-15"><a href="#cb1-15"></a>            df <span class="op">=</span> pd.DataFrame(csv_data[<span class="dv">1</span>:], columns<span class="op">=</span>head)</span>
+<span id="cb1-16"><a href="#cb1-16"></a>            <span class="bu">print</span>(df)</span></code></pre></div>
+<h6 id="with-r">With R</h6>
+<p>An example in R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">library</span> (RCurl)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>API_URL &lt;-<span class="st"> &quot;https://www.api.test.driss.org&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>students &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1223</span>, <span class="dv">1212</span>, <span class="dv">1245</span>) </span>
+<span id="cb2-5"><a href="#cb2-5"></a>subjects &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;letters&quot;</span>, <span class="st">&quot;numbers&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="cf">for</span>(students <span class="cf">in</span> students){</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="cf">for</span>(subject <span class="cf">in</span> subjects){</span>
+<span id="cb2-8"><a href="#cb2-8"></a>        endpoint &lt;-<span class="st"> </span><span class="kw">str_c</span>(API_URL, <span class="st">&quot;/activity/students/&quot;</span>, student, <span class="st">&quot;/subjects/&quot;</span>, subject, <span class="st">&quot;/csv&quot;</span>)</span>
+<span id="cb2-9"><a href="#cb2-9"></a>        html_page &lt;-<span class="st"> </span><span class="kw">getURL</span>(endpoint)</span>
+<span id="cb2-10"><a href="#cb2-10"></a>    }</span>
+<span id="cb2-11"><a href="#cb2-11"></a>}</span></code></pre></div>
+<h2 id="how-to-update-data">How to update data ?</h2>
+<p>API provides access points and methods to consult, edit, update, delete specific resources. All theses methods stands in the endpoint category <code>admin</code>. Edition, suppression require both an authorisation set throught password to unlock the endpoint access.</p>
+<p>The main usage here is to provide facilities to update the stats choosing to integrate or not specific students into the scope of the enquiry.</p>
+<p>Main operations: * Unlock access * Consult status of the students * Change group for multiples students * Change group for one classroom * Change group for one student</p>
+<h3 id="unlock-access">Unlock access</h3>
+<p>Some endpoints requires an authorisation as they modify the database and impact the dashboard.</p>
+<p>In these case a lock appears on the left side of the endpoint.</p>
+<figure>
+<img src="screenshots/admin_endpoint.png" alt="" /><figcaption>admin_endpoint.png</figcaption>
+</figure>
+<p>You can unlock it click on the corresponding icon</p>
+<p>You can also unlock using the main button <code>Authorize</code> at the top right corner of the interface.</p>
+<figure>
+<img src="screenshots/authorize.png" alt="" /><figcaption>authorize</figcaption>
+</figure>
+<p>This authorisation will lasts the time of a session: you don’t need to enter the password each time you need to use a locked endpoint.</p>
+<ol type="1">
+<li>Click on <code>Authorize</code> button on the top right corner of the interface.</li>
+<li>Fill in the form with the password given</li>
+<li>Click on the <code>Authorize</code> button</li>
+<li>Click on <code>Close</code> button (Logout is to revoke the access)</li>
+</ol>
+<figure>
+<img src="screenshots/authorize_form.png" alt="" /><figcaption>authorize_form.png</figcaption>
+</figure>
+<ul>
+<li>If password is wrong: the request will return a 401 Error UNAUTHORIZED and a message will be displayed {“message”: “Token is invalid”}</li>
+</ul>
+<p><img src="screenshots/wrong_password.png" /></p>
+<p><img src="screenshots/unauthorized_request.png" /></p>
+<h3 id="consult-group-of-students">Consult group of students</h3>
+<ul>
+<li>Consult students where group information is None</li>
+</ul>
+<p>If group is None: group is missing for the student. It simply means that student was not referenced inside the initial csv listing students with they groups:</p>
+<p>in JSON : <a href="https://api.test.driss.org/admin/students/groups/None/csv">https://api.test.driss.org/admin/students/groups/None</a></p>
+<p>in CSV : <a href="https://api.test.driss.org/admin/students/groups/None/csv">https://api.test.driss.org/admin/students/groups/None/csv</a></p>
+<ul>
+<li>Consult students which status is False</li>
+</ul>
+<p>in JSON : <a href="https://api.test.driss.org/admin/students/groups/None/csv">https://api.test.driss.org/admin/students/status/False</a></p>
+<p>in CSV : <a href="https://api.test.driss.org/admin/students/groups/None/csv">https://api.test.driss.org/admin/students/status/False/csv</a></p>
+<p>Status of the student can be False for two reasons: - group information is missing for this student (No reference of this student has been found in the initial file that define a group for each student) - student was declared inside the initial file defining the group for each student but no files has been found.</p>
+<p>To cover those 2 different cases a specific status is available</p>
+<ul>
+<li>status <code>missing</code> means that student was not initially declared but documents have been found so student exists in db but has no group</li>
+</ul>
+<p>in JSON : <a href="https://api.test.driss.org/admin/students/groups/missing/csv">https://api.test.driss.org/admin/students/status/missing</a></p>
+<p>in CSV : <a href="https://api.test.driss.org/admin/students/groups/missing/csv">https://api.test.driss.org/admin/students/status/missing/csv</a></p>
+<ul>
+<li>status <code>empty</code> means that student was initially declared but no documents have been found. student has only information given by the initial file</li>
+</ul>
+<p>in JSON : <a href="https://api.test.driss.org/admin/students/groups/empty/csv">https://api.test.driss.org/admin/students/status/empty</a></p>
+<p>in CSV : <a href="https://api.test.driss.org/admin/students/groups/empty/csv">https://api.test.driss.org/admin/students/status/empty/csv</a></p>
+<h3 id="edit-group-for-one-student">Edit group for one student</h3>
+<p>You may want to edit a group for a specific student to declare the session he belongs to or to remove him from global stats (this is made by setting the group to <code>guest</code>): you will need to use the interface.</p>
+<p>Inside admin category endpoint a specific endpoint in orange is available to edit a unique student.</p>
+<p>PUT <code>/admin/students/{student}/</code></p>
+<p><img src="screenshots/put_student_group.png" /></p>
+<ul>
+<li><p>Press <code>try it out</code> button and the edit frorm will be shown.</p></li>
+<li><p>Fill in the form as following:</p>
+<ul>
+<li>In parameters enter the student ID e.g 111</li>
+<li>In payload change the value between quotes attached to group e.g “guest”</li>
+</ul></li>
+</ul>
+<p><img src="screenshots/put_student_group_edit_group.png" /></p>
+<ul>
+<li>Press execute: &gt; This request will update the group for the given student
+<ul>
+<li>If everything is OK: API will answer 200 response</li>
+<li>In case of error: API will display 404, 406 errors and additional information will be displayed in response body</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>When group is changed from guest to [“r/m”, “m/r”] this impact the stats: so a background function is fired to add the student to the stats tables and compute again the global tables. This operation takes about 3 minutes to proceed. Be patient!</p>
+</blockquote>
+<blockquote>
+<p>When group is changed from [“r/m”, “m/r”] to guest this impact the stats: so a background function is fired to remove the student from the stats tables and compute again the global tables. This operation takes about 3 minutes to proceed. Be patient!</p>
+</blockquote>
+<h3 id="edit-group-for-muliples-student">Edit group for muliples student</h3>
+<p>You may want to edit a group for multiple students that doesn’t necessarily belong to same classroom to declare the session he belongs to or to remove him from global stats (this is made by setting the group to <code>guest</code>): you will need to use the interface.</p>
+<p>Inside admin category endpoint a specific endpoint in orange is available to edit a multiple student.</p>
+<p>PUT <code>/admin/students/</code></p>
+<p><img src="screenshots/put_multiple_students_group.png" /></p>
+<ul>
+<li>Press <code>try it out</code> button and the edit frorm will be shown.</li>
+</ul>
+<p><img src="screenshots/put_multiple_students.png" /></p>
+<ul>
+<li><p>Fill in the form as following:</p>
+<ul>
+<li>In payload change the value between quotes attached to group e.g “guest”</li>
+<li>In payload change the value between quotes attached to students e.g “112, 113, 2987”</li>
+</ul></li>
+<li><p>Press execute:</p>
+<blockquote>
+<p>This request will update the group for all the students in the list</p>
+</blockquote>
+<ul>
+<li>If everything is OK: API will answer 200 response</li>
+<li>In case of error: API will display 404, 406 errors and additional information will be displayed in response body</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>When group is changed from guest to [“r/m”, “m/r”] this impact the stats: so a background function is fired to add the student to the stats tables and compute again the global tables. This operation takes about 3 minutes to proceed by student. Be patient!</p>
+</blockquote>
+<blockquote>
+<p>When group is changed from [“r/m”, “m/r”] to guest this impact the stats: so a background function is fired to remove the student from the stats tables and compute again the global tables. This operation takes about 3 minutes to proceed by student. Be patient!</p>
+</blockquote>
+<h3 id="edit-group-for-one-classroom">Edit group for one classroom</h3>
+<p>You may want to edit a group for a classroom to declare the session it belongs to or to remove it from global stats (this is made by setting the group to <code>guest</code>): you will need to use the interface.</p>
+<p>Inside admin category endpoint a specific endpoint in orange is available to edit a multiple student.</p>
+<p>PUT <code>/admin/classrooms/</code></p>
+<p><img src="screenshots/classroom_group.png" /></p>
+<ul>
+<li>Press <code>try it out</code> button and the edit frorm will be shown.</li>
+</ul>
+<p><img src="screenshots/put_classroom_group.png" /></p>
+<ul>
+<li><p>Fill in the form as following:</p>
+<ul>
+<li>In parameters enter the classroom ID</li>
+<li>In payload change the value between quotes attached to group e.g student</li>
+</ul></li>
+<li><p>Press execute:</p>
+<blockquote>
+<p>This request will update the group for all the students belonging to the classroom</p>
+</blockquote>
+<ul>
+<li>If everything is OK: API will answer 200 response</li>
+<li>In case of error: API will display 404, 406 errors</li>
+<li>additional information will be displayed in response body as a message</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>When group is changed from guest to [“r/m”, “m/r”] this impact the stats: so a background function is fired to add the student to the stats tables and compute again the global tables. This operation takes about 3 minutes to proceed by student. Be patient!</p>
+</blockquote>
+<blockquote>
+<p>When group is changed from [“r/m”, “m/r”] to guest this impact the stats: so a background function is fired to remove the student from the stats tables and compute again the global tables. This operation takes about 3 minutes to proceed by student. Be patient!</p>
+</blockquote>
+<h2 id="receipes">Receipes</h2>
+<h3 id="receipe-1-edit-group-for-missing-students">Receipe 1: Edit group for missing students</h3>
+<ol type="1">
+<li>List the student that have no group</li>
+</ol>
+<p>GET /admin/students/status/missing/csv</p>
+<p>into a variable students store the columns student into a list</p>
+<p>and then a string with coma separated values</p>
+<ol start="2" type="1">
+<li>Set all the missing student to ‘guest’</li>
+</ol>
+<p>PUT /admin/students/</p>
+<p>{group: “guest”, students:students}</p>
+<h3 id="receipe-2-consut-global-activity-on-a-subject-for-group-rm">Receipe 2: Consut global activity on a subject for group <code>r/m</code></h3>
+<ol type="1">
+<li>Get the list of all students belonging to group r/m</li>
+</ol>
+<p>GET /admin/students/groups/r-m/csv</p>
+<p>store list into a variable called students</p>
+<ol start="2" type="1">
+<li>Load stats for each student</li>
+</ol>
+<p>subjects = [“numbers”, “letters”]</p>
+<p>for subject in subjects:</p>
+<pre><code>for student in students:
+
+    GET /activity/students/{student}/subject/{subject}</code></pre>
+<h3 id="receipe-3-consut-global-progression-for-group-rm">Receipe 3: Consut global progression for group ‘r/m’</h3>
+<ol type="1">
+<li>Get the list of all students belonging to group r/m</li>
+</ol>
+<p>GET /admin/students/groups/r-m/csv</p>
+<p>store list into a variable called students</p>
+<ol start="2" type="1">
+<li>Load stats for each students</li>
+</ol>
+<p>subjects = [“numbers”, “letters”]</p>
+<p>for subject in subjects:</p>
+<pre><code>for student in students:
+
+    GET /progression/chapters/students/{student}/subject/{subject}</code></pre>
+<h3 id="receipe-4-consult-global-confusion-matrix-csv-data-and-graph">Receipe 4: Consult global confusion matrix CSV data and graph</h3>
+<p>GET /tasks/confusion/subject/{subject}/csv</p>
+<p>If you want to access the graph confusion matrix on all the student is available on the dashboard at this adress: https://test.driss.org/confusion</p>
+<h3 id="receipe-5-consult-lexical-decision-for-every-student-of-rm-group">Receipe 5: Consult lexical decision for every student of r/m group</h3>
+<ol type="1">
+<li>Get the list of students belonging to group r/m</li>
+</ol>
+<p>GET /admin/students/groups/r-m/csv</p>
+<p>store list into a variable called students</p>
+<ol start="2" type="1">
+<li>Load stats for students</li>
+</ol>
+<p>for student in students:</p>
+<pre><code>GET /tasks/decision/students/{student}/subjects/letters/csv</code></pre>

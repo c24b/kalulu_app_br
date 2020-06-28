@@ -1,0 +1,57 @@
+{
+    "ENVIRONNEMENT":
+        {
+            "NAME": "local",
+            "ENV": "local",
+            "DEBUG": true
+        },
+        "SSL":{
+            "activate": false,
+            "certificate": "/etc/ssl/fullchain.pem",
+            "certificate_key": "/etc/ssl/private_key.pem",
+            "dh_param": "/etc/ssl/dh_param.pem"
+        },    
+    "FILES_SERVER":
+        {
+            "name": "files_srv",
+            "login": "unicogorsy-ludo",
+            "host":"ssh.cluster006.hosting.ovh.net",
+            "dir":"kalulu_data/"
+        },
+    "SOURCES_SERVER":
+        {
+            "name": "gitlab",
+            "host":"lab.driss.org",
+            "repo":"kalulu_app",
+            "login":"c24b"
+        },
+    "SERVER":
+        {
+            "name": "local",
+            "user":"c24b",
+            "srv_name":"local",
+            "host":"localhost"
+        },
+    "API":
+        {
+            "name": "api",
+            "host":"0.0.0.0",
+            "hostname": "0.0.0.0",
+            "port":"5000",
+            "token":"Jellyfish",
+            "sudo_token":"Caterpillar"
+        },
+    "FRONT":
+        {
+            "name": "front",
+            "host":"0.0.0.0",
+            "port":"8080"
+        },
+    "DB":
+        {
+            "name":"kalulu",
+            "host":"localhost",
+            "port":27017,
+            "URI":"mongodb://localhost:27017/kalulu"
+        }
+}

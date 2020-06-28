@@ -1,0 +1,451 @@
+#!/usr/bin/python3
+# encoding: utf-8
+__doc__ = "Compute records by student by day and by dataset"
+
+from utils import timeit, connect, pymongo, SON
+
+@timeit
+def create_student_nb_gapfill_gp_day(student=None):
+	'''
+	From RECORDS WHERE dataset in ["numbers", "gp", "gapfill_lang"]
+	Group (student if student.group != "guest records by dataset and by day
+	sort records by student, dataset and unixtime
+	get FIRST unixTime LAST unixTime
+	create sequence and sequence_nb
+	compute timespent (LAST-FIRST) into seconds
+	MERGE into student_day
+	'''
+
+	db = connect()
+	db.student_day.drop_indexes()
+	db.student_day.create_index([('student', pymongo.ASCENDING), (
+			'day', pymongo.ASCENDING), ('subject', pymongo.ASCENDING), ('dataset', pymongo.ASCENDING)], unique=True)
+	if student is None:
+		db.student_day.drop()
+		
+		# print("\t\t - Create table student_dataset_day for gp, nb and gapfill_lang")
+	pipeline = [
+		# {
+		# 	"$in":"records"
+		# },
+		{
+			"$match": {
+				"group": {"$ne": "guest"},
+				"dataset": {"$in": ["numbers", "gp", "gapfill_lang"]}
+			},
+		},
+		{
+			"$sort": SON([("student", 1), ("unixTime", 1)])
+		},
+		{
+			"$group": {
+				"_id": {
+					"classroom": "$classroom",
+					"student": "$student",
+					"group": "$group",
+					"dataset": "$dataset",
+					"day": "$day",
+					"subject": "$subject",
+				},
+				"start": {"$first": "$unixTime"},
+				"end": {"$last": "$unixTime"},
+				"nb_records": {"$sum": 1},
+				"records": {"$push": "$$ROOT"},
+				
+			}
+		},
+		{
+			"$addFields":{
+				"nb_sequences": 1
+			}
+		},
+		{
+			"$project": {
+				"_id": 0,
+				"student": "$_id.student",
+				"classroom": "$_id.classroom",
+				"group": "$_id.group",
+				"dataset": "$_id.dataset",
+				"subject": "$_id.subject",
+				"day": "$_id.day",
+				"nb_records": "$nb_records",
+				"sequences" : [["$start","$end"]],
+				"nb_sequences": "$nb_sequences",
+				"start": "$start",
+				"end": "$end",
+				"end_date": { "$dateToString": { "format": "%Y-%m-%d %H:%M:%S", "date": "$end",  "timezone": "Europe/Paris"} },
+				"start_date": { "$dateToString": { "format": "%Y-%m-%d %H:%M:%S", "date": "$start",  "timezone": "Europe/Paris"} },
+				"timespent": {"$subtract": ["$end", "$start"]},
+				"timespent_sec": {"$divide": [{"$subtract": ["$end", "$start"]}, 1000]},
+				"timespent_min": {"$divide": [{"$subtract": ["$end", "$start"]}, 60000]},
+				# "timespent_hms": { "$dateToString": { "format": "%H:%M:%S", "date": {"$toDate":{"$divide": [{"$subtract": ["$end", "$start"]}, 1000]}}, "timezone": "Europe/Paris"} },
+				# "elapsedTimes": {"$push": {"$records.elapsedTime"}},
+				"records": {
+					'$map': {
+						'input': '$records',
+						'as': 'record',
+						'in': {
+							'tag': '$$record.tag',
+							'value': '$$record.value',
+							'unixTime': '$$record.unixTime',
+							'score': '$$record.score',
+							"stimulus_tag": '$$record.stimulus_tag',
+							"target_tag": '$$record.target_tag',
+							"CV": "$$record.CV",
+							'stimulus': "$$record.stimulus",
+							'target': "$$record.target",
+							"click": "$$record.isClicked",
+							"chapter": '$$record.chapter',
+							"lesson": '$$record.lesson',
+							"elapsedTime": "$$record.elapsedTime"
+							
+						}
+					}
+				},
+
+			}
+		},
+		{
+			"$merge": "student_day"
+		},
+	]
+	if student is not None:
+		pipeline[0] = {
+				"$match": {
+					"student": int(student), 
+					"group": {"$ne": "guest"},
+					"dataset": {"$in": ["numbers", "gp", "gapfill_lang"]}
+				},
+			}
+	try:
+		db.records.aggregate(pipeline, allowDiskUse=True)
+	except pymongo.errors.DuplicateKeyError:
+		pass
+	
+	# print("\t\t> Table student_dataset_day is ready with nb gp and gapfill!")
+
+# ASSESSMENTS
+## ASSSEMENTS CASE: RECORDS> SEQUENCE > DAY 
+
+@timeit
+def create_student_assessment_day(student=None):
+	'''
+	FROM records
+	Group student (not guests) records by dataset by day and 
+	by sequences (defined by AssessmentEndTime)
+	GROUP records by SEQUENCES
+	AND THEN SEQUENCE BY DAY
+
+	MERGE into student_day	
+	'''
+	
+	db = connect()
+	db.student_day.drop_indexes()
+	pipeline = [
+		{
+			"$match": {
+				"group": {"$ne": "guest"},
+				"dataset": {"$in": ["assessments_maths", "assessments_language"]}
+			},
+		},
+		{
+			"$sort": SON([("student", 1), ("unixTime", 1), ("assessmentEndTime", 1)])
+		},
+		{
+			#first group by student, dataset, day, assessementEndTime 
+			# as a sequence
+			"$group": {
+				"_id": {
+					"classroom": "$classroom",
+					"student": "$student",
+					"group": "$group",
+					"dataset": "$dataset",
+					"day": "$day",
+					"subject": "$subject",
+					"assessmentEndTime": "$assessmentEndTime",
+					# "chapter": "$chapter"
+				},
+				#get the first unixTime of the records
+				"start": {"$first": "$unixTime"},
+				#control unixTimes
+				# "unixTimes": {"$push":"$unixTime"},
+				#control elapsedTimes
+				# "elapsedTimes": {"$push":"$elapsedTime"},
+				#get the last unixTime of the records
+    			# "end": {"$last": "$unixTime"},
+				"nb_records": {"$sum": 1},
+				
+				# assessements DO have chapter but not lessons
+				# as but as assessementEndTime is unique no need to add chapter
+    			# "chapter": {"$addToSet": "$chapter"},
+				# "lesson": None,
+    			"records": {"$push": "$$ROOT"},
+			}
+		},
+		{
+			#define the sequence unit
+			"$project": {
+				"_id": 0,
+				"student": "$_id.student",
+				"classroom": "$_id.classroom",
+				"group": "$_id.group",
+				"dataset": "$_id.dataset",
+				"subject": "$_id.subject",
+				"day": "$_id.day",
+				# "chapter": "$chapter",
+				# "lesson": "$lesson",
+				"nb_records": "$nb_records",
+				"start": "$start",
+				
+				# here we use as sequence end time the assessementEndTime
+				# instead of last record unixTime
+				"end": "$_id.assessmentEndTime",
+				#timespent on the sequence
+				# "timespent_sec": {"$divide": [{"$subtract": ["$_id.assessmentEndTime", "$start"]}, 1000]},  
+				"records": {
+					'$map': {
+						'input': '$records',
+						'as': 'record',
+						'in': {
+							'tag': '$$record.tag',
+							'unixTime': '$$record.unixTime',
+							'score': '$$record.score',
+							'stimulus': "$$record.stimulus",
+							'target': "$$record.target",
+							# in assessments there is not value isClicked
+							# "click": "$$record.isClicked",
+							# so transforming click with score
+							'click': '$$record.score',
+							# just in case for verification
+							"chapter": '$$record.chapter',
+							"lesson": None,
+       						# in assessments there is an elapsedTime
+							# that gives us not the timespent 
+							# but the time reaction
+							# we could order by elapsedTime to have what he clicked first 
+							"elapsedTime": "$$record.elapsedTime"
+						}
+					}
+				},
+
+			}
+		},
+		{
+			#sort sequence
+			"$sort": SON([("student", 1), ("start", 1)])
+		},
+		{
+			#group sequences on day
+			"$group": {
+				"_id": {
+					"classroom": "$classroom",
+					"student": "$student",
+					"group": "$group",
+					"dataset": "$dataset",
+					"day": "$day",
+					"subject": "$subject",
+					# "chapter": "$chapter",
+					#"lesson": "$lesson",
+				},
+				#count sequences grouped
+				"nb_sequences": {"$sum": 1},
+				#sequences started at
+				"starts": {"$push":"$start"},
+				#sequences ended at
+				"ends": {"$push": "$end"},
+				
+				# superior boundaries that doesn't show the different sequences
+				# means the first item of the day 
+				"started_at": {"$first": "$starts"},
+				#and the last item of the day
+				"ended_at": {"$last":"$ends"},
+				
+				"nb_records": {"$sum": "$nb_records"},
+				"records": {"$push": "$records"},
+				#SUM OF timespent in sequences
+				"timespent_sec": {"$sum": "$timespent_sec"}
+			}
+		},
+		{
+			#define day unit
+			"$project": {
+				"_id": 0,
+				"student": "$_id.student",
+				"classroom": "$_id.classroom",
+				"group": "$_id.group",
+    			"dataset": "$_id.dataset",
+				"subject": "$_id.subject",
+				"day": "$_id.day",
+				# means the first item of the day 
+				"started_at": "$started_at",
+				#and the last item of the day
+				"ended_at": "$ended_at",
+				
+				# "lesson": "$_id.lesson",
+				# "chapter": "$_id.chapter",
+				"nb_records": "$nb_records",
+				# beginning of the day
+				"started_at": "$started_at",
+				# end of the day
+				"ended_at": "$ended_at",
+				#sequence of plays within a day
+				"sequences" :{"$zip":
+					{
+						"inputs": ["$starts", "$ends"],
+						"useLongestLength": True,
+						"defaults":  [None, None],
+					}
+				},
+				# sum of timespent in sequences
+				"timespent_sec": "$timespent_sec",
+				# timespent into day unit
+				"day_timespent": {"$subtract": ["$ended_at", "$started_at"]},
+				"day_timespent_sec": {"$divide": [{"$subtract": ["$end", "$start"]}, 1000]},
+				"day_timespent_min": {"$divide": [{"$subtract": ["$end", "$start"]}, 60000]}, 
+				"nb_sequences": "$nb_sequences",
+				"starts": {
+					"$reduce": {
+						"input": "$starts",
+						"initialValue": [],
+					  		"in": {"$concatArrays": ["$$this", "$$value"]}
+					}},
+				"ends": {
+					"$reduce": {
+						"input": "$ends",
+						"initialValue": [],
+					  		"in": {"$concatArrays": ["$$this", "$$value"]}
+					}},
+				"records": {
+					"$reduce": {
+						"input": "$records",
+						"initialValue": [],
+					  		"in": {"$concatArrays": ["$$this", "$$value"]}
+					}},
+
+			}
+		},
+		{
+
+			"$sort": SON([("student", 1), ("day", 1), ("start", 1), ("end",1)])
+		},
+		{
+			"$group": {
+				"_id": {
+					"classroom": "$classroom",
+					"student": "$student",
+					"group": "$group",
+					"dataset": "$dataset",
+					"day": "$day",
+					"subject": "$subject",    
+				},
+				# means the first item of the day 
+				"started_at": "$started_at",
+				#and the last item of the day
+				"ended_at": "$ended_at"},
+				
+				"start": {"$first": "$starts"},
+				"end": {"$last": "$ends"},
+				"nb_sequences": {"$sum": "$nb_sequences"},
+				"sequences": {"$push": "$sequences"},
+    			"nb_records": {"$sum": "$nb_records"},
+				"records": {"$push": "$records"},
+				# SUM OF timesPENT IN SEC
+				"timespent_sec": {"sum":"$timespent_sec"}
+				# can have multiple chapters within a day
+				# be never observed
+				# "chapters": {"$addToSet": "$chapter"},
+				# "lessons": {"$push": "$lesson"}
+			}
+		},
+		{
+			"$project": {
+				"_id": 0,
+				"student": "$_id.student",
+				"classroom": "$_id.classroom",
+				"group": "$_id.group",
+				"dataset": "$_id.dataset",
+				"subject": "$_id.subject",
+				"day": "$_id.day",
+				# "chapters": "$chapters",
+				# "lessons": "$lessons",
+				"nb_records": "$nb_records",
+				"start": "$start",
+				"end": "$end",
+				"end_date": { "$dateToString": { "format": "%Y-%m-%d %H:%M:%S", "date": "$end",  "timezone": "Europe/Paris"} },
+				"start_date": { "$dateToString": { "format": "%Y-%m-%d %H:%M:%S", "date": "$start",  "timezone": "Europe/Paris"} },
+				"timespent_sec": "$timespent_sec",
+				"timespent_min": {"$divide": ["$timespent_sec", 60]},
+				"timespent": {"$multiply": ["$timespent_sec", 1000]},
+				"nb_sequences": "$nb_sequences",
+    			# timespent into day unit
+				"day_timespent": {"$subtract": ["$ended_at", "$started_at"]},
+				"day_timespent_sec": {"$divide": [{"$subtract": ["$end", "$start"]}, 1000]},
+				"day_timespent_min": {"$divide": [{"$subtract": ["$end", "$start"]}, 60000]},
+
+				"sequences": {
+					"$reduce": {
+						"input": "$sequences",
+						"initialValue": [],
+					  		"in": {"$concatArrays": ["$$this", "$$value"]}
+					}},
+    			"records": {
+					"$reduce": {
+						"input": "$records",
+						"initialValue": [],
+					  		"in": {"$concatArrays": ["$$this", "$$value"]}
+					}},
+
+			}
+		},
+		{
+			"$merge": "student_day"
+		},
+	]
+	if student is not None:
+		pipeline[0] = {
+			"$match": {
+				"student": int(student),
+				"group": {"$ne": "guest"},
+				"dataset": {"$in": ["assessments_maths", "assessments_language"]}
+			},
+		}
+	
+	db = connect()
+	try:
+		db.records.aggregate(pipeline, allowDiskUse=True)
+	except pymongo.errors.DuplicateKeyError:
+		pass
+
+
+	
+	
+
+@timeit
+def create_day_tables(student=None):
+    #create student dataset day for numbers, gp, gapfill
+	create_student_nb_gapfill_gp_day(student)
+	# create student dataset day for assessements
+	create_student_assessment_day(student)
+	#old steps:
+	#create_student_assessment_sequences()
+	#create_student_assessment_day_lesson()
+	#create_student_nb_gapfill_gp_day()
+	#create_student_assessment_day()
+	# create_student_dataset()
+	return True, ""
+	
+@timeit
+def delete_day_tables(student=None):
+	db = connect()
+	msg = ""
+	if student is not None:
+		db.student_day.drop_indexes()
+		db.student_day.delete_many({"student":student})
+		return True, msg
+	else:
+		db.student_day.drop()
+		db.student_day.drop_indexes()
+		return True, msg
+if __name__=="__main__":
+	create_day_tables()
+	quit()

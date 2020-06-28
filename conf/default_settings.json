@@ -1,0 +1,66 @@
+{
+    "ENVIRONNEMENT":
+        {
+            "NAME": "default",
+            "ENV": "default",
+            "DEBUG": false,
+            "user": "admin"
+        },
+    "SSL":{
+        "activate": true,
+        "certificate": "/etc/ssl/fullchain.pem",
+        "certificate_key": "/etc/ssl/private_key.pem",
+        "dh_param": "/etc/ssl/dh_param.pem"
+    },
+    "FILES_SERVER":
+        {
+            "name": "files_srv",
+            "host":"",
+            "hostname":"files.example.org",
+            "login":"user_login",
+            "dir":"/kalulu_data",
+            "ssh_cmd":"user_login@hostname:/kalulu_data"
+        },
+    "SOURCES_SERVER":
+        {
+            "name": "kalulu",
+            "host": "",
+            "hostname":"lab.driss.org",
+            "repo":"kalulu",
+            "login":"kalulu_team"
+        },
+    "SERVER":
+        {
+            "name": "default",
+            "user":"admin",
+            "host":"0.0.0.0",
+            "hostname": "default.org",
+        },
+    "API":
+        {
+            "name": "api",
+            "host":"0.0.0.0",
+            "hostname": "api.example.org",
+            "port":"5000",
+            "token":"",
+            "sudo_token":"",
+            "static_dir": "static",
+            "allowed_IPs": "*"
+        },
+    "FRONT":
+        {
+            "name": "front",
+            "host":"0.0.0.0",
+            "port":"8080",
+            "hostname": "dashboard.example.org",
+            "static_dir": "assets",
+            "allowed_IPs": "api.example.org"
+        },
+    "DB":
+        {
+            "name":"kalulu",
+            "host":"localhost",
+            "port":27017,
+            "URI":"mongodb://localhost:27017/kalulu"
+        }    
+}

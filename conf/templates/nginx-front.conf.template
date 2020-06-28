@@ -1,0 +1,21 @@
+## VIRTUAL HOST for front
+server {
+      listen    80;
+      server_name    {{FRONT.hostname}} www.{{FRONT.hostname}};
+      access_log    /var/log/nginx/{{FRONT.name}}.log;
+      
+      add_header Strict-Transport-Security "max-age=31536000;";
+      charset utf-8;
+      root    {{FRONT.dir}};
+      index $uri $uri/ index.html;
+      location / {
+          root {{FRONT.dir}}; 
+          index index.html;
+          try_files $uri $uri/ @rewrites;
+      }
+
+      location @rewrites {
+        rewrite ^(.+)$ /index.html last;
+      }
+
+}

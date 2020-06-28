@@ -1,0 +1,13 @@
+# VIRTUALHOST FOR DOC
+
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name {{DOC.hostname}} www.{{DOC.hostname}};
+        root {{DOC.dir}};
+        index index.html;
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}

@@ -1,0 +1,64 @@
+﻿LESSON,CHAPTER,LABEL,NOTION (INFO),1,2,3
+1,1,A,"[""a-a""]",jellyfish,jellyfish,crabs
+2,1,I,"[""i-i"", ""i-j"", ""i-J""]",jellyfish,jellyfish,crabs
+3,1,E,"[""e-%""]",jellyfish,crabs,parakeets
+4,1,O,"[""o-o"", ""o-O""]",jellyfish,crabs,crabs
+5,2,U,"[""u-8"", ""u-y""]",jellyfish,crabs,parakeets
+6,2,L,"[""l-l"", ""ll-l""]",crabs,monkeys,crabs
+7,2,M,"['m-m"", ""mm-m""]",crabs,monkeys,parakeets
+8,2,S,"[""s-s"", ""ss-s""]",crabs,monkeys,crabs
+9,3,é,"[""é-e""]",jellyfish,crabs,parakeets
+10,3,V,"[""v-v""]",crabs,parakeets,frog
+11,3,R,"[""r-R""]",crabs,monkeys,frog
+12,3,ou,"[""ou-u"", ""ou-o"", ""ou-w""]",jellyfish,monkeys,crabs
+13,4,#,"[""e-#"", ""s-#"", ""t-#""]",penguin,monkeys,ants
+14,4,N,"[""n-n"", ""nn-n""]",crabs,parakeets,frog
+15,4,un,"[""un-1""]",jellyfish,penguin,ants
+16,5,F,"[""f-f"", ""ff-f""]",crabs,monkeys,frog
+17,5,ch,"[""ch-S""]",crabs,monkeys,ants
+18,5,J,"[""j-Z""]",crabs,monkeys,parakeets
+19,6,D,"[""d-d""]",crabs,monkeys,frog
+20,6,T,"[""t-t"", ""tt-t""]",crabs,turtles,ants
+21,6,P,"[""p-p"", ""pp-p""]",crabs,monkeys,parakeets
+22,7,C,"[""c-k"", ""cc-c""]",crabs,turtles,ants
+23,7,B,"[""b-b""]",crabs,parakeets,frog
+24,7,G,"[""g-g""]",crabs,monkeys,parakeets
+25,8,gu,"[""gu""]",crabs,monkeys,frog
+26,8,K,"[""k-k""]",crabs,parakeets,turtles
+27,8,Q,"[""q-k"", ""qu-k""]",crabs,caterpillar,ants
+28,9,Z,"[""z-z""]",crabs,frog,monkeys
+29,9,es,"[""es-E""]",crabs,penguin,ants
+30,9,est,"[""est-E""]",jellyfish,ants,ants
+31,10,en,"[""en-@"", ""em-@""]",jellyfish,jellyfish,frog
+32,10,on,"[""on-§"", ""om-§""]",jellyfish,monkeys,turtles
+33,10,an,"[""an-@"", ""am-@""]",jellyfish,ants,monkeys
+34,11,in,"[""in-5"", ""en-5"", ""im-5""]",monkeys,caterpillar,ants
+35,11,e,"[""e-E""]",crabs,monkeys,caterpillar
+36,11,C,"[""c-s"", ""ç-s"", ""sc-s""]",crabs,turtles,monkeys
+37,12,G,"[""g-Z""]",crabs,frog,ants
+38,12,S,"[""s-z""]",monkeys,turtles,frog
+39,12,er,"[""er-e""]",jellyfish,monkeys,caterpillar
+40,13,oi,"[""oi-W""]",jellyfish,frog,caterpillar
+41,13,è,"[""è-E""]",jellyfish,turtles,ants
+42,13,et,"[""et-E"", ""et-e""]",jellyfish,monkeys,caterpillar
+43,14,ent,"[""ent-#""]",penguin,crabs,penguin
+44,14,au,"[""au-o"", ""au-O"", ""eau-o""]",jellyfish,jellyfish,frog
+45,14,ant,"[""ant-@""]",jellyfish,turtles,monkeys
+46,15,h,"[""h-#"", ""th-t""]",penguin,parakeets,penguin
+47,15,t,"[""t-s""]",monkeys,caterpillar,monkeys
+48,15,x,"[""x-x""]",parakeets,monkeys,turtles
+49,16,gn,"[""gn-N""]",crabs,caterpillar,frog
+50,16,ai,"[""ai-e"", ""ai-E""]",jellyfish,frog,turtles
+51,16,ez,"[""ez-e""]",jellyfish,ants,ants
+52,17,#,"[""b-#"", ""c-#"", ""d-#"", ""f-#"", ""g-#"", ""l-#"", ""p-#"", ""r-#""]",penguin,frog,penguin
+53,17,ill,"[""ill-J""]",jellyfish,monkeys,ants
+54,17,eu,"[""eu-2"", ""eu-9"", ""oeu-9"", ""oeu-2""]",jellyfish,jellyfish,frog
+55,18,â,"[""â-a""]",jellyfish,turtles,ants
+56,18,oy,"[""oy-4""]",jellyfish,monkeys,caterpillar
+57,19,il,"[""il-j""]",jellyfish,turtles,ants
+58,19,ill,"[""ill-j""]",jellyfish,frog,turtles
+59,19,ph,"[""ph-f""]",crabs,monkeys,caterpillar
+60,19,ei,"[""ei-E"", ""ei-e""]",jellyfish,frog,caterpillar
+61,20,y,"[""y-J"", ""y-j""]",crabs,monkeys,turtles
+62,20,ê,"[""ê-E""]",jellyfish,turtles,ants
+63,20,w,"[""w-w""]",crabs,parakeets,caterpillar
